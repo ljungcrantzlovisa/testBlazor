@@ -1,0 +1,39 @@
+﻿@page "/students"
+@inject NavigationManager Navigation
+
+
+
+<h3>Students</h3>
+
+<div class="d-flex">
+    <!-- Add student -->
+    <div class="me-3">
+        <input @bind="newStudent" placeholder="Enter student name" class="form-control" />
+        <button @onclick="AddStudent" class="btn btn-primary mt-2">Add Student</button>
+    </div>
+
+    <!-- List -->
+    <div>
+        <h4>Student List</h4>
+        <ul class="list-group">
+            @foreach (var student in students)
+            {
+                <li class="list-group-item">@student</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    private string newStudent = string.Empty;
+    private List<string> students = new();
+
+    private void AddStudent()
+    {
+        if (!string.IsNullOrWhiteSpace(newStudent))
+        {
+            students.Add(newStudent);
+            newStudent = string.Empty; // clean txt field
+        }
+    }
+}
